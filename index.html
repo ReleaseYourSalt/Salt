@@ -15,10 +15,10 @@
             loop: true,
             events: {
                   onReady: function (e) {
+                        info.innerHTML = 'video is loaded';
                         if ( userAgent.match( /iPad/i ) || userAgent.match( /iPhone/i ) || userAgent.match( /iPod/i )  || ( userAgent.match( /Android/i ))) {
                               <input type="button" value="Play" onclick="e.target.playVideo();">
                         } else {
-                              info.innerHTML = 'video is loaded';
                               e.target.playVideo();
                         }
                   },

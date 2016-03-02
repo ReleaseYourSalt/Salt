@@ -1,16 +1,28 @@
 <body>
+  <body onload="script();">
+
+  <button id="but" class="mobileTrigger">Click if Mobile</button>
+
   <div id="player" style="position: absolute; top: -9999px; left: -9999px;"></div>
   <div id="info">loading...</div>
   <script src="http://www.youtube.com/player_api"></script>
   <script>
+  	document.getElementsById("but").style.visibility="invisible"
     var info = document.getElementById('info');
 
     function onYouTubePlayerAPIReady() {
+    	var mobileTrigger = document.querySelector(".mobileTrigger");
+    	
+    
       var player = new YT.Player('player', {
         videoId: 'TpZ3WvvSiLk', // this is the id of the video at youtube (the stuff after "?v=")
         loop: true,
         events: {
           onReady: function(e) {
+          	document.getElementsById("but").style.visibility="visible";
+            mobileTrigger.addEventListener("click", function(){
+    					e.target.playVideo();
+    				});
             info.innerHTML = 'video is loaded';
             e.target.playVideo();
           },

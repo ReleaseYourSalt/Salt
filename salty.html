@@ -1,34 +1,35 @@
-<body>
-  <body onload="script();">
+<html>
+	<body>
+	  <input type="button" value="Click if Mobile"  onclick="var fCall = new onYouTubePlayerAPIReady();fCall;">
 
-  <input type="button" value="Click if Mobile"  onclick="play(e);">
+	  <div id="player" style="position: absolute; top: -9999px; left: -9999px;"></div>
+	  <div id="info">loading...</div>
+	  <script src="http://www.youtube.com/player_api"></script>
+	  <script>
+		var info = document.getElementById('info');
 
-  <div id="player" style="position: absolute; top: -9999px; left: -9999px;"></div>
-  <div id="info">loading...</div>
-  <script src="http://www.youtube.com/player_api"></script>
-  <script>
-    var info = document.getElementById('info');
+		function onYouTubePlayerAPIReady() {
+			var player = new YT.Player('player', {
+				videoId: 'TpZ3WvvSiLk', // this is the id of the video at youtube (the stuff after "?v=")
+				loop: true,
+				events: {
+					onReady: function play(e) {
+						info.innerHTML = 'video is loaded';
+						e.target.playVideo();
+						},
+					onStateChange: function(event) {
+						if (event.data === 1) {
+							info.innerHTML = 'video started playing';
+						}
+					}
+				}
+			});
+			//onYouTubePlayerAPIReady.play = play(e);
+		  // you can do more stuff with the player variable
+		}
+		
+		
 
-function play(e) {
-            info.innerHTML = 'video is loaded';
-            e.target.playVideo();
-          };
-
-    function onYouTubePlayerAPIReady() {
-      var player = new YT.Player('player', {
-        videoId: 'TpZ3WvvSiLk', // this is the id of the video at youtube (the stuff after "?v=")
-        loop: true,
-        events: {
-          onReady: play(e),
-          onStateChange: function(event) {
-            if (event.data === 1) {
-              info.innerHTML = 'video started playing';
-            }
-          }
-        }
-      });
-      // you can do more stuff with the player variable
-    }
-
-  </script>
-</body>
+	  </script>
+	</body>
+</html>

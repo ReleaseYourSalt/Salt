@@ -1,7 +1,7 @@
 <body>
   <body onload="script();">
 
-  <input type="button" value="Click if Mobile"  onclick="onYouTubePlayerAPIReady.e.target.playVideo();">
+  <input type="button" value="Click if Mobile"  onclick="play(e);">
 
   <div id="player" style="position: absolute; top: -9999px; left: -9999px;"></div>
   <div id="info">loading...</div>
@@ -9,15 +9,17 @@
   <script>
     var info = document.getElementById('info');
 
+function play(e) {
+            info.innerHTML = 'video is loaded';
+            e.target.playVideo();
+          };
+
     function onYouTubePlayerAPIReady() {
       var player = new YT.Player('player', {
         videoId: 'TpZ3WvvSiLk', // this is the id of the video at youtube (the stuff after "?v=")
         loop: true,
         events: {
-          onReady: function(e) {
-            info.innerHTML = 'video is loaded';
-            e.target.playVideo();
-          },
+          onReady: play(e),
           onStateChange: function(event) {
             if (event.data === 1) {
               info.innerHTML = 'video started playing';
